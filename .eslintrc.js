@@ -17,6 +17,15 @@ module.exports = {
   ],
   // add your custom rules here
   'rules': {
+    // 'indent': [
+    //     2,
+    //     4, {
+    //         'SwitchCase': 1
+    //     }
+    // ],
+    'indent': 0,
+    'no-tabs': 0,
+    'semi': ["error", "always"],
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await

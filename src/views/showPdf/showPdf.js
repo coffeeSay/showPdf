@@ -3,7 +3,7 @@ import PDFJS from 'pdfjs-dist';
 PDFJS.workerSrc = require('pdfjs-dist/build/pdf.worker');
 
 export default {
-    name: 'pdfDetails',
+    name: 'showPdf',
     data() {
         return {
             isNotData: {
@@ -19,11 +19,8 @@ export default {
         };
     },
     mounted() {
-        const {
-            id,
-            name,
-        } = this.$route.params;
-        this.fileName = name;
+
+        this.fileName = 'test.pdf';
         this.urlPdf = require('../../assets/test.pdf');
         this.ele = document.querySelector('#theCanvas');
 
@@ -31,7 +28,6 @@ export default {
     },
     methods: {
         renderPDF(url, canvasContainer) {
-            // store.dispatch('showLoading', '加载中...');
 
             const renderPage = (page) => {
                 const viewport = page.getViewport(1);
@@ -49,7 +45,6 @@ export default {
                 viewport.transform[5] = _hetiht;
                 viewport.viewBox[2] = _width;
                 viewport.viewBox[3] = _hetiht;
-
 
                 const renderContext = {
                     canvasContext: ctx,
@@ -76,9 +71,7 @@ export default {
                 for (let num = this.startPages; num <= page; num++) {
                     pdfDoc.getPage(num).then(renderPage);
                 }
-                // store.dispatch('hideLoading');
             };
-            // PDFJS.disableWorker = true;
 
             PDFJS.getDocument(url).promise.then(renderPages).catch((reason) => {
                 // store.dispatch('hideLoading');
